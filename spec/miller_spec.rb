@@ -57,14 +57,14 @@ describe Miller do
     expect(occurrence_numbers).to eq([0, 1, 2, 3])
   end
 
-  it 'distinguies the conditioning properties from the data' do
+  it 'distinguishes the conditioning properties from the data' do
     miller = Miller.new(valid_observation_set)
     properties = miller.send(:possible_conditioning_properties)
 
     expect(properties).to eq(%w(A B C D))
   end
 
-  it 'distinguies the conditioned property from the data' do
+  it 'distinguishes the conditioned property from the data' do
     miller = Miller.new(valid_observation_set)
     property = miller.send(:conditioned_properties)
 
