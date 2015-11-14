@@ -9,6 +9,12 @@ describe Miller do
     Matrix[occurrence_0, occurrence_1, occurrence_2, occurrence_3]
   end
 
+  let(:invalid_observation_set) do
+    occurrence_0 = [0, 'A', 'B', 'C', 'D', 'E']
+    occurrence_1 = [1, 'this', 'is', 'not', 'valid', 'data']
+    Matrix[occurrence_0, occurrence_1]
+  end
+
   let(:present_and_absent_observation_set) do
     occurrence_0 = [0, 'A', 'B', 'C', 'D', 'E']
     occurrence_1 = [1, 'P', 'P', 'P', 'A', 'P']
@@ -50,7 +56,7 @@ describe Miller do
     expect(data).to eq(valid_data_set)
   end
 
-  it 'distinguishes the occurence numbers from the data' do
+  it 'distinguishes the occurrence numbers from the data' do
     miller = Miller.new(valid_observation_set)
     occurrence_numbers = miller.send(:occurrence_numbers)
 
@@ -66,9 +72,20 @@ describe Miller do
 
   it 'distinguishes the conditioned property from the data' do
     miller = Miller.new(valid_observation_set)
-    property = miller.send(:conditioned_properties)
+    property = miller.send(:conditioned_property)
 
     expect(property).to eq('E')
+  end
+
+  it 'sets data' do
+    miller = Miller.new(valid_observation_set)
+    data = miller.send(:data)
+
+    expect(data).to eq(valid_data_set)
+  end
+
+  it 'raises error with invalid data' do
+    expect { Miller.new(invalid_observation_set) }.to raise_error(RuntimeError)
   end
 
   context 'when using the direct method of agreement' do

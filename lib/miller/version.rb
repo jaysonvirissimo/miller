@@ -1,3 +1,3 @@
-module Miller
-  VERSION = '0.1.0'
+class Miller
+  VERSION = '0.2.0'
 end
