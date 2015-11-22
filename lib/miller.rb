@@ -35,10 +35,10 @@ class Miller
   end
 
   def convert_to_proper_truth_value(value)
-    case value
-    when false, 0, '0', 'A', 'Absent', 'a', 'false'
+    case value.to_s.downcase
+    when '0', 'a', 'absent', 'false'
       false
-    when true, 1, '1', 'P', 'Present', 'p', 'true'
+    when '1', 'p', 'present', 'true'
       true
     else
       fail "Invalid truth value: #{value}"
