@@ -56,38 +56,50 @@ describe Miller do
     expect(data).to eq(valid_data_set)
   end
 
-  it 'distinguishes the occurrence numbers from the data' do
-    miller = Miller.new(valid_observation_set)
-    occurrence_numbers = miller.send(:occurrence_numbers)
-
-    expect(occurrence_numbers).to eq([0, 1, 2, 3])
-  end
-
-  it 'distinguishes the conditioning properties from the data' do
-    miller = Miller.new(valid_observation_set)
-    properties = miller.send(:possible_conditioning_properties)
-
-    expect(properties).to eq(%w(A B C D))
-  end
-
-  it 'distinguishes the conditioned property from the data' do
-    miller = Miller.new(valid_observation_set)
-    property = miller.send(:conditioned_property)
-
-    expect(property).to eq('E')
-  end
-
-  it 'sets data' do
-    miller = Miller.new(valid_observation_set)
-    data = miller.send(:data)
-
-    expect(data).to eq(valid_data_set)
-  end
-
   it 'raises error with invalid data' do
     expect { Miller.new(invalid_observation_set) }.to raise_error(RuntimeError)
   end
 
-  context 'when using the direct method of agreement' do
+  context 'with valid obeservation set' do
+
+    before(:each) do
+      @miller = Miller.new(valid_observation_set)
+    end
+
+    it 'distinguishes the occurrence numbers from the data' do
+      occurrence_numbers = @miller.send(:occurrence_numbers)
+
+      expect(occurrence_numbers).to eq([0, 1, 2, 3])
+    end
+
+    it 'distinguishes the conditioning properties from the data' do
+      properties = @miller.send(:possible_conditioning_properties)
+
+      expect(properties).to eq(%w(A B C D))
+    end
+
+    it 'distinguishes the conditioned property from the data' do
+      property = @miller.send(:conditioned_property)
+
+      expect(property).to eq('E')
+    end
+
+    it 'sets data' do
+      data = @miller.send(:data)
+
+      expect(data).to eq(valid_data_set)
+    end
+
+    it 'responds to #direct_method_of_agreement' do
+      expect(@miller).to respond_to(:direct_method_of_agreement)
+    end
+
+    it 'responds to #inverse_method_of_agreement' do
+      expect(@miller).to respond_to(:inverse_method_of_agreement)
+    end
+
+    it 'responds to #direct_method_of_agreement' do
+      expect(@miller).to respond_to(:method_of_difference)
+    end
   end
 end
