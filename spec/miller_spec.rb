@@ -2,25 +2,25 @@ require 'spec_helper'
 
 describe Miller do
   let(:valid_observation_set) do
-    occurrence_0 = [0, 'A', 'B', 'C', 'D', 'E']
+    properties = [0, 'A', 'B', 'C', 'D', 'E']
     occurrence_1 = [1, true, true, true, false, true]
     occurrence_2 = [2, true, false, true, true, true]
     occurrence_3 = [3, false, true, true, false, true]
-    Matrix[occurrence_0, occurrence_1, occurrence_2, occurrence_3]
+    Matrix[properties, occurrence_1, occurrence_2, occurrence_3]
   end
 
   let(:invalid_observation_set) do
-    occurrence_0 = [0, 'A', 'B', 'C', 'D', 'E']
+    properties = [0, 'A', 'B', 'C', 'D', 'E']
     occurrence_1 = [1, 'this', 'is', 'not', 'valid', 'data']
-    Matrix[occurrence_0, occurrence_1]
+    Matrix[properties, occurrence_1]
   end
 
   let(:present_and_absent_observation_set) do
-    occurrence_0 = [0, 'A', 'B', 'C', 'D', 'E']
+    properties = [0, 'A', 'B', 'C', 'D', 'E']
     occurrence_1 = [1, 'P', 'P', 'P', 'A', 'P']
     occurrence_2 = [2, 'P', 'A', 'P', 'P', 'P']
     occurrence_3 = [3, 'A', 'P', 'P', 'A', 'P']
-    Matrix[occurrence_0, occurrence_1, occurrence_2, occurrence_3]
+    Matrix[properties, occurrence_1, occurrence_2, occurrence_3]
   end
 
   let(:zero_and_one_observation_set) do
